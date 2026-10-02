@@ -2,6 +2,8 @@
 
 Bayesian differential expression analysis for RNA-seq under global upregulation. Designed to be used in larger sample situations where global upregulation is expected and there are enough samples to safely learn it. This is potentially relevant to areas like large cancer studies that have been processed consistently but may have large differences between them.
 
+Pre-print here: https://www.biorxiv.org/content/10.64898/2026.08.28.747928v1.full
+
 ## Installation
 
 ```python
