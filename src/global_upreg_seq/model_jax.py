@@ -53,7 +53,7 @@ def jax_glob_seq_model(x, y, N, P, F):
     with numpyro.plate("sample", N, dim=-2):
         with numpyro.plate("gene", P, dim=-1):
             numpyro.sample("obs",
-                dist.NegativeBinomial2(jnp.exp(log_mu), alpha),
+                dist.NegativeBinomial2(jnp.exp(log_mu), 1.0/alpha),
                 obs=y)
 
 def jax_glob_seq_model_nosf(x, y, N, P, F):
@@ -83,4 +83,4 @@ def jax_glob_seq_model_nosf(x, y, N, P, F):
             alpha = alpha_gene * (1.0 + sample_alpha)  # [N, P]
 
             numpyro.sample("obs",
-                dist.NegativeBinomial2(jnp.exp(log_mu), alpha), obs=y)
+                dist.NegativeBinomial2(jnp.exp(log_mu), 1.0/alpha), obs=y)

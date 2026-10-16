@@ -47,9 +47,9 @@ def jax_generate_simulated_data(
     gene_effect    = 2 * jax.random.uniform(k4, (gene_size,))
     overdispersion = ((a_1 / base_mean) + a_0) * gene_effect
 
-    base_samples  = dist.NegativeBinomial2(base_mean,  overdispersion).sample(k5, (group_size,))
+    base_samples  = dist.NegativeBinomial2(base_mean,  1.0/overdispersion).sample(k5, (group_size,))
     key, k6 = jax.random.split(key)
-    upreg_samples = dist.NegativeBinomial2(upreg_mean, overdispersion).sample(k6, (group_size,))
+    upreg_samples = dist.NegativeBinomial2(upreg_mean, 1.0/overdispersion).sample(k6, (group_size,))
 
     combined = jnp.concatenate([base_samples, upreg_samples], axis=0).astype(jnp.float32)
     labels   = jnp.concatenate([jnp.zeros(group_size, dtype=jnp.int32),
